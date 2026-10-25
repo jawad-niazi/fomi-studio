@@ -35,17 +35,18 @@ export default function FomiStudioPage() {
   const [creditsLeft, setCreditsLeft] = useState(78);
   const [toastMessage, setToastMessage] = useState('');
 
+  // Sync dark class on document element
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
+
   // Handle dark mode toggle
   const toggleTheme = () => {
-    setIsDark((prev) => {
-      const next = !prev;
-      if (next) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      return next;
-    });
+    setIsDark((prev) => !prev);
   };
 
   const showToast = (msg) => {

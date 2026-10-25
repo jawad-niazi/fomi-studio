@@ -22,7 +22,7 @@ export const INITIAL_HISTORY = [
   {
     id: 'hist-3',
     title: 'Fairytale Pine Forest',
-    thumbnail: 'https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=300&q=80',
+    thumbnail: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=300&q=80',
     prompt: 'Enchanted deep emerald pine forest, bioluminescent moss on winding trail, morning mist rays filtering through tall trees',
     model: 'FOMI Realism v2',
     aspectRatio: '1:1',

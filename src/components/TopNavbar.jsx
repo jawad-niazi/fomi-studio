@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Home,
   ImageIcon,
@@ -11,8 +11,12 @@ import {
   Headphones,
   Moon,
   Sun,
+  Settings,
+  CreditCard,
+  Key,
+  LogOut,
+  ChevronDown,
   Sparkles,
-  FileText,
 } from 'lucide-react';
 
 export default function TopNavbar({
@@ -22,8 +26,21 @@ export default function TopNavbar({
   setActiveTab,
   creditsLeft = 78,
   maxCredits = 100,
-  openDocModal,
 }) {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <header className="w-full h-16 px-4 md:px-6 flex items-center justify-between border-b transition-colors duration-200 z-30 select-none bg-[#fbf9f6] dark:bg-[#0e0f11] border-[#f0e8df] dark:border-[#1e2024]">
       {/* Left: Brand Logo */}
@@ -38,8 +55,11 @@ export default function TopNavbar({
 
       {/* Center: Usage/Quota meter + Navigation Tools */}
       <div className="flex flex-col items-center gap-1.5">
-        {/* Credit/Usage Pill Bar */}
-        <div className="flex items-center gap-2 group cursor-pointer" title={`${creditsLeft} of ${maxCredits} Fast Generations left today`}>
+        {/* Credit/Usage Pill Bar matching mockup */}
+        <div
+          className="flex items-center gap-2 group cursor-pointer"
+          title={`${creditsLeft} of ${maxCredits} Fast Generations left today`}
+        >
           <div className="w-44 md:w-60 h-2 bg-[#f0e3d8] dark:bg-[#25282e] rounded-full overflow-hidden relative">
             <div
               className="h-full bg-[#de896c] rounded-full transition-all duration-500"
@@ -111,18 +131,8 @@ export default function TopNavbar({
         </nav>
       </div>
 
-      {/* Right: Actions, Theme, & User Profile */}
+      {/* Right: Actions, Theme, & User Profile Dropdown */}
       <div className="flex items-center gap-2 md:gap-3">
-        {/* Product Thinking Doc Button (Highlights candidate's product thinking) */}
-        <button
-          onClick={openDocModal}
-          className="hidden lg:flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-full bg-[#f3eae0] dark:bg-[#1f2228] hover:bg-[#ede0d2] dark:hover:bg-[#2a2e36] text-[#6b5e52] dark:text-[#d3ccc4] transition-all border border-[#e5d8cb] dark:border-[#2d313a]"
-          title="View Product Thinking & Design Rationale"
-        >
-          <FileText className="w-3.5 h-3.5 text-[#de896c]" />
-          <span>Product Thinking Doc</span>
-        </button>
-
         {/* Gallery */}
         <button
           className="hidden sm:flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full hover:bg-[#f2e7dc] dark:hover:bg-[#1c1e22] text-[#685c53] dark:text-[#c7bfb6] transition-colors"
@@ -144,22 +154,102 @@ export default function TopNavbar({
         {/* Dark / Light Toggle */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-full hover:bg-[#f2e7dc] dark:hover:bg-[#1c1e22] text-[#685c53] dark:text-[#c7bfb6] transition-colors"
+          className="p-2 rounded-full hover:bg-[#f2e7dc] dark:hover:bg-[#1c1e22] text-[#685c53] dark:text-[#c7bfb6] transition-all cursor-pointer active:scale-90"
           title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
-          {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+          {isDark ? (
+            <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
+          ) : (
+            <Moon className="w-4 h-4 hover:-rotate-12 transition-transform" />
+          )}
         </button>
 
-        {/* Profile Avatar */}
-        <div className="relative cursor-pointer group">
-          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#de896c]/40 group-hover:ring-[#de896c] transition-all">
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-              alt="Creator Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-white dark:ring-[#0e0f11]" />
+        {/* Profile Avatar with Interactive Dropdown */}
+        <div className="relative" ref={profileRef}>
+          <button
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+            className="flex items-center gap-1 cursor-pointer focus:outline-none"
+            title="Account Menu"
+          >
+            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#de896c]/50 hover:ring-[#de896c] transition-all relative">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+                alt="Creator Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-white dark:ring-[#0e0f11]" />
+          </button>
+
+          {/* Account Dropdown Menu */}
+          {isProfileOpen && (
+            <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#181a20] border border-[#e8ded3] dark:border-[#2b2f3a] shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              {/* User Header */}
+              <div className="px-4 py-3 border-b border-[#f0e6dc] dark:border-[#262933]">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#2d2520] dark:text-[#f2ebe5]">
+                    Hamza Tariq
+                  </span>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#faeee8] dark:bg-[#2b1f1a] text-[#de896c] border border-[#f0d5c8] dark:border-[#42291f]">
+                    PRO
+                  </span>
+                </div>
+                <p className="text-[11px] text-[#8e8074] dark:text-[#9ea6b5] truncate mt-0.5">
+                  creator@fomi.art
+                </p>
+
+                {/* Quota in Dropdown */}
+                <div className="mt-2.5 pt-2 border-t border-[#f2e9e0] dark:border-[#242730]">
+                  <div className="flex justify-between text-[10px] text-[#786c62] dark:text-[#9ea6b5] mb-1">
+                    <span>Fast Generations</span>
+                    <span className="font-semibold text-[#de896c]">{creditsLeft}/{maxCredits}</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-[#f0e3d8] dark:bg-[#25282e] rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-[#de896c] rounded-full"
+                      style={{ width: `${(creditsLeft / maxCredits) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Menu Links */}
+              <div className="py-1 text-xs text-[#52453c] dark:text-[#d3cbd2]">
+                <button
+                  onClick={() => setIsProfileOpen(false)}
+                  className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
+                >
+                  <Settings className="w-3.5 h-3.5 text-[#8e8074]" />
+                  <span>Workspace Settings</span>
+                </button>
+                <button
+                  onClick={() => setIsProfileOpen(false)}
+                  className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
+                >
+                  <Key className="w-3.5 h-3.5 text-[#8e8074]" />
+                  <span>API Keys & Webhooks</span>
+                </button>
+                <button
+                  onClick={() => setIsProfileOpen(false)}
+                  className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
+                >
+                  <CreditCard className="w-3.5 h-3.5 text-[#8e8074]" />
+                  <span>Billing & Subscription</span>
+                </button>
+              </div>
+
+              {/* Sign Out */}
+              <div className="pt-1 mt-1 border-t border-[#f0e6dc] dark:border-[#262933]">
+                <button
+                  onClick={() => setIsProfileOpen(false)}
+                  className="w-full px-4 py-2 flex items-center gap-2.5 text-xs text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-colors text-left font-medium"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Log out</span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>
