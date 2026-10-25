@@ -118,17 +118,17 @@ export default function OutputCanvas({
 
               <div>
                 <p
-                  className={`text-xs leading-relaxed text-[#3b322c] dark:text-[#ede4dc] font-normal select-text transition-all ${
-                    !expandedPrompts[batch.id] ? 'line-clamp-5' : ''
+                  className={`text-sm sm:text-[14px] leading-relaxed text-[#2d2621] dark:text-[#ded7cf] font-normal select-text transition-all ${
+                    !expandedPrompts[batch.id] ? (isSingle ? 'line-clamp-2' : 'line-clamp-4') : ''
                   }`}
                 >
                   {batch.prompt}
                 </p>
-                {batch.prompt.length > 180 && (
+                {batch.prompt.length > 120 && (
                   <button
                     type="button"
                     onClick={() => toggleExpand(batch.id)}
-                    className="mt-2 inline-flex items-center text-[10px] font-semibold text-[#8a7d72] dark:text-[#a09489] hover:text-[#2d2621] dark:hover:text-[#f2ebe4] transition-colors cursor-pointer"
+                    className="mt-2 inline-flex items-center text-xs font-medium text-[#8a7d72] dark:text-[#a09489] hover:text-[#c85a3c] dark:hover:text-[#ea7352] transition-colors cursor-pointer"
                   >
                     {expandedPrompts[batch.id] ? 'Show less' : 'Show more...'}
                   </button>

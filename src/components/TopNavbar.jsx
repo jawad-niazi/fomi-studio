@@ -42,7 +42,8 @@ export default function TopNavbar({
   }, []);
 
   return (
-    <header className="w-full h-16 px-4 md:px-6 flex items-center justify-between border-b transition-colors duration-200 z-30 select-none bg-[#fcfbfa] dark:bg-[#0e0f11] border-[#f2ece5] dark:border-[#1e2024]">
+    <>
+      <header className="w-full h-16 px-4 md:px-6 flex items-center justify-between border-b transition-colors duration-200 z-30 select-none bg-[#fcfbfa] dark:bg-[#0e0f11] border-[#f2ece5] dark:border-[#1e2024]">
       {/* Left: Brand Logo */}
       <div className="flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-2xl tracking-tighter text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
@@ -53,8 +54,8 @@ export default function TopNavbar({
         </span>
       </div>
 
-      {/* Center: Usage/Quota meter + Navigation Tools */}
-      <div className="flex flex-col items-center gap-1.5">
+      {/* Center: Usage/Quota meter + Navigation Tools (Desktop) */}
+      <div className="hidden md:flex flex-col items-center gap-1.5">
         {/* Credit/Usage Pill Bar matching mockup */}
         <div
           className="flex items-center gap-2 group cursor-pointer"
@@ -220,5 +221,84 @@ export default function TopNavbar({
         </div>
       </div>
     </header>
+
+    {/* Mobile Sub-Bar: Usage Quota & Mode Icons (After navbar and before history strip) */}
+    <div className="flex md:hidden flex-col items-center justify-center gap-2 py-3 px-4 bg-[#fcfbfa] dark:bg-[#0e0f11] border-b border-[#f2ece5] dark:border-[#1e2024] select-none">
+      {/* Credit/Usage Pill Bar matching mockup */}
+      <div
+        className="flex items-center gap-2 group cursor-pointer"
+        title={`${creditsLeft} of ${maxCredits} Fast Generations left today`}
+      >
+        <div className="w-52 h-2 bg-[#f4ebe2] dark:bg-[#25282e] rounded-full overflow-hidden relative">
+          <div
+            className="h-full bg-gradient-to-r from-[#e28065] to-[#d26b4e] rounded-full transition-all duration-500"
+            style={{ width: `${(creditsLeft / maxCredits) * 100}%` }}
+          />
+        </div>
+        <span className="text-[10px] font-semibold text-[#968b82] dark:text-[#a09a93] tracking-wide">
+          {creditsLeft}/{maxCredits}
+        </span>
+      </div>
+
+      {/* Workspace Mode Icons */}
+      <nav className="flex items-center gap-3">
+        <button
+          onClick={() => setActiveTab('home')}
+          className={`p-1.5 rounded-lg transition-colors ${
+            activeTab === 'home'
+              ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
+              : 'text-[#8e8278] hover:text-black dark:hover:text-white'
+          }`}
+          title="Home"
+        >
+          <Home className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => setActiveTab('image')}
+          className={`p-1.5 rounded-lg transition-colors ${
+            activeTab === 'image'
+              ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
+              : 'text-[#8e8278] hover:text-black dark:hover:text-white'
+          }`}
+          title="Image Generation Studio"
+        >
+          <ImageIcon className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => setActiveTab('video')}
+          className={`p-1.5 rounded-lg transition-colors ${
+            activeTab === 'video'
+              ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
+              : 'text-[#8e8278] hover:text-black dark:hover:text-white'
+          }`}
+          title="Video Generation Studio"
+        >
+          <Video className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => setActiveTab('edit')}
+          className={`p-1.5 rounded-lg transition-colors ${
+            activeTab === 'edit'
+              ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
+              : 'text-[#8e8278] hover:text-black dark:hover:text-white'
+          }`}
+          title="AI Inpainting & Canvas Editor"
+        >
+          <Wand2 className="w-4 h-4" />
+        </button>
+        <button
+          onClick={() => setActiveTab('projects')}
+          className={`p-1.5 rounded-lg transition-colors ${
+            activeTab === 'projects'
+              ? 'text-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a]'
+              : 'text-[#8e8278] hover:text-black dark:hover:text-white'
+          }`}
+          title="Project Folders"
+        >
+          <Folder className="w-4 h-4" />
+        </button>
+      </nav>
+    </div>
+  </>
   );
 }
