@@ -192,7 +192,7 @@ export const INITIAL_HISTORY = [
   },
 ];
 
-// Initial mock generation batch matching the exact mockup
+// Initial mock generation batch matching the exact mockup (starts with 1 batch on first load)
 export const INITIAL_BATCHES = [
   {
     id: 'batch-mockup-1',
@@ -229,44 +229,6 @@ export const INITIAL_BATCHES = [
         alt: 'Smiling redheaded woman in cream sweater variant 4',
         resolution: '2048 x 2730',
         seed: '8492044',
-      },
-    ],
-  },
-  {
-    id: 'batch-mockup-2',
-    timestamp: '10 mins ago',
-    prompt:
-      'Close-up studio beauty portrait variations of a cheerful 31-year-old redheaded woman with natural freckles, warm smile, wearing minimalist gold hoops and cream knit sweater, soft gallery ambient light',
-    model: 'FOMI Realism v2',
-    aspectRatio: '3:4',
-    images: [
-      {
-        id: 'img-2-1',
-        url: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=85',
-        alt: 'Redhead close-up smile variant 1',
-        resolution: '2048 x 2730',
-        seed: '8492051',
-      },
-      {
-        id: 'img-2-2',
-        url: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85',
-        alt: 'Redhead close-up smile variant 2',
-        resolution: '2048 x 2730',
-        seed: '8492052',
-      },
-      {
-        id: 'img-2-3',
-        url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=85',
-        alt: 'Redhead close-up smile variant 3',
-        resolution: '2048 x 2730',
-        seed: '8492053',
-      },
-      {
-        id: 'img-2-4',
-        url: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=85',
-        alt: 'Redhead close-up smile variant 4',
-        resolution: '2048 x 2730',
-        seed: '8492054',
       },
     ],
   },

@@ -14,7 +14,7 @@ import {
 } from '../data/mockData';
 
 export default function FomiStudioPage() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [activeTab, setActiveTab] = useState('image');
   const [mode, setMode] = useState('image');
   const [prompt, setPrompt] = useState(
@@ -35,6 +35,7 @@ export default function FomiStudioPage() {
   const [creditsLeft, setCreditsLeft] = useState(78);
   const [toastMessage, setToastMessage] = useState('');
   const [selectedHistoryId, setSelectedHistoryId] = useState(null);
+  const [seed, setSeed] = useState('');
 
   // Sync dark class on document element
   useEffect(() => {
@@ -134,11 +135,12 @@ export default function FomiStudioPage() {
     showToast(`Loaded prompt: "${item.prompt.slice(0, 30)}..."`);
   };
 
-  // Use prompt from batch
-  const handleUsePrompt = (promptText, modelText) => {
+  // Use prompt and seed from batch or image modal
+  const handleUsePrompt = (promptText, modelText, seedVal) => {
     setPrompt(promptText);
     if (modelText) setSelectedModel(modelText);
-    showToast('Loaded prompt into editor');
+    if (seedVal) setSeed(seedVal);
+    showToast(seedVal ? `Loaded prompt & seed #${seedVal}` : 'Loaded prompt into editor');
     window.scrollTo({ top: 120, behavior: 'smooth' });
   };
 
@@ -151,7 +153,7 @@ export default function FomiStudioPage() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${isDark ? 'dark' : ''} bg-[#fbf9f6] dark:bg-[#0d0f12] text-[#2d2621] dark:text-[#ede6df] transition-colors duration-200`}>
+    <div className={`min-h-screen flex flex-col ${isDark ? 'dark' : ''} bg-[#fdfbf9] dark:bg-[#0d0f12] text-[#2d2621] dark:text-[#ede6df] transition-colors duration-200`}>
       {/* 1. Top Navigation Bar */}
       <TopNavbar
         isDark={isDark}
@@ -187,6 +189,8 @@ export default function FomiStudioPage() {
           selectedModel={selectedModel}
           setSelectedModel={setSelectedModel}
           onEnhancePrompt={handleEnhancePrompt}
+          seed={seed}
+          setSeed={setSeed}
         />
 
         {/* Right Output Feed Canvas */}

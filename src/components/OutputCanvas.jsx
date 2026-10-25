@@ -76,33 +76,33 @@ export default function OutputCanvas({
       {batches.map((batch) => (
         <section
           key={batch.id}
-          className="flex flex-col xl:flex-row gap-3.5 items-stretch group"
+          className="flex flex-col xl:flex-row gap-3.5 items-stretch group transition-all duration-300"
         >
-          {/* Left Prompt Card */}
-          <div className="w-full xl:w-72 xl:min-w-[280px] p-4 rounded-2xl bg-[#fbf5f0] dark:bg-[#16181d] border border-[#efe3d6] dark:border-[#262932] flex flex-col justify-between shadow-2xs hover:border-[#de896c]/60 transition-colors">
-            <div className="flex flex-col gap-2">
+          {/* Left Prompt Card matching Image 1 */}
+          <div className="w-full xl:w-72 xl:min-w-[280px] p-4 rounded-2xl bg-[#fcf8f4] dark:bg-[#16181d] border border-[#f2eae0] dark:border-[#252830] flex flex-col justify-between shadow-2xs hover:border-[#df795d]/60 transition-colors">
+            <div className="flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-semibold text-[#a39487] dark:text-[#7f8695] uppercase tracking-wider">
+                <span className="text-xs font-semibold text-[#8a7d72] dark:text-[#9ea6b5]">
                   Prompt
                 </span>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => onCopyPrompt(batch.prompt, batch.id)}
-                    className="p-1 text-[#8c7e73] hover:text-[#de896c] rounded-md hover:bg-white dark:hover:bg-[#222630] transition-colors"
+                    className="p-1 text-[#8c7e73] hover:text-[#df795d] rounded-md hover:bg-white dark:hover:bg-[#222630] transition-colors cursor-pointer"
                     title="Copy Prompt"
                   >
                     {copiedPromptId === batch.id ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <Check className="w-3.5 h-3.5 text-emerald-500 animate-in zoom-in-75 duration-150" />
                     ) : (
                       <Copy className="w-3.5 h-3.5" />
                     )}
                   </button>
                   <button
                     onClick={() => onUsePrompt(batch.prompt, batch.model)}
-                    className="p-1 text-[#8c7e73] hover:text-[#de896c] rounded-md hover:bg-white dark:hover:bg-[#222630] transition-colors"
+                    className="p-1 text-[#8c7e73] hover:text-[#df795d] rounded-md hover:bg-white dark:hover:bg-[#222630] transition-colors cursor-pointer"
                     title="Remix / Edit in Prompt Box"
                   >
-                    <RotateCcw className="w-3.5 h-3.5" />
+                    <RotateCcw className="w-3.5 h-3.5 hover:-rotate-45 transition-transform duration-200" />
                   </button>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function OutputCanvas({
                   <button
                     type="button"
                     onClick={() => toggleExpand(batch.id)}
-                    className="mt-1.5 text-[10px] font-semibold text-[#de896c] hover:underline cursor-pointer"
+                    className="mt-2 inline-flex items-center text-[10px] font-semibold text-[#8a7d72] dark:text-[#a09489] hover:text-[#2d2621] dark:hover:text-[#f2ebe4] transition-colors cursor-pointer"
                   >
                     {expandedPrompts[batch.id] ? 'Show less' : 'Show more...'}
                   </button>
@@ -127,10 +127,10 @@ export default function OutputCanvas({
               </div>
             </div>
 
-            {/* Model Badge at bottom right matching the mockup */}
-            <div className="flex items-center justify-end mt-4 pt-2 border-t border-[#f0e3d6] dark:border-[#262a34]">
-              <span className="text-[11px] font-medium px-3 py-1 rounded-lg bg-white dark:bg-[#21242d] border border-[#ebdcd0] dark:border-[#2d313c] text-[#4d4239] dark:text-[#d3cbd2] shadow-2xs">
-                Model: {batch.model}
+            {/* Model Badge at bottom left matching Image 1 */}
+            <div className="flex items-center justify-start mt-4 pt-2.5 border-t border-[#f0e3d6] dark:border-[#262a34]">
+              <span className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-white dark:bg-[#20232b] border border-[#e8ded3] dark:border-[#2a2e38] text-[#6b5f54] dark:text-[#c4cbd8]">
+                {batch.model}
               </span>
             </div>
           </div>

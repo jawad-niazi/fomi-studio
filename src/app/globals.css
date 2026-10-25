@@ -9,32 +9,84 @@
   }
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  /* Sleek modern thin scrollbar for textarea and cards */
+  /* Sleek modern thin scrollbar for textarea, modal, and cards */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #dfcfbe;
+    background-color: #d8c8b6;
     border-radius: 9999px;
   }
   .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #313642;
+    background-color: #2e3440;
   }
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #dfcfbe transparent;
+    scrollbar-color: #d8c8b6 transparent;
   }
   .dark .custom-scrollbar {
-    scrollbar-color: #313642 transparent;
+    scrollbar-color: #2e3440 transparent;
   }
+}
+
+/* Global window scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #dfcfbe;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #2c313c;
+}
+
+/* Sleek Minimalist Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #ebe0d4;
+  height: 4px;
+  border-radius: 9999px;
+}
+.dark input[type="range"]::-webkit-slider-runnable-track {
+  background: #2b303b;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -5px;
+  background-color: #ffffff;
+  border: 2px solid #c85a3c;
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+  background-color: #c85a3c;
 }
 
 @keyframes shimmer {
@@ -47,7 +99,7 @@
 }
 
 :root {
-  --background: #fbf9f6;
+  --background: #fdfbf9;
   --foreground: #2d2621;
 }
 

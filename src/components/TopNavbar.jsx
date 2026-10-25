@@ -42,7 +42,7 @@ export default function TopNavbar({
   }, []);
 
   return (
-    <header className="w-full h-16 px-4 md:px-6 flex items-center justify-between border-b transition-colors duration-200 z-30 select-none bg-[#fbf9f6] dark:bg-[#0e0f11] border-[#f0e8df] dark:border-[#1e2024]">
+    <header className="w-full h-16 px-4 md:px-6 flex items-center justify-between border-b transition-colors duration-200 z-30 select-none bg-[#fcfbfa] dark:bg-[#0e0f11] border-[#f2ece5] dark:border-[#1e2024]">
       {/* Left: Brand Logo */}
       <div className="flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-2xl tracking-tighter text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity">
@@ -60,13 +60,13 @@ export default function TopNavbar({
           className="flex items-center gap-2 group cursor-pointer"
           title={`${creditsLeft} of ${maxCredits} Fast Generations left today`}
         >
-          <div className="w-44 md:w-60 h-2 bg-[#f0e3d8] dark:bg-[#25282e] rounded-full overflow-hidden relative">
+          <div className="w-44 md:w-60 h-2 bg-[#f4ebe2] dark:bg-[#25282e] rounded-full overflow-hidden relative">
             <div
-              className="h-full bg-[#de896c] rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#e28065] to-[#d26b4e] rounded-full transition-all duration-500"
               style={{ width: `${(creditsLeft / maxCredits) * 100}%` }}
             />
           </div>
-          <span className="text-[10px] font-semibold text-[#8e8278] dark:text-[#a09a93] tracking-wide">
+          <span className="text-[10px] font-semibold text-[#968b82] dark:text-[#a09a93] tracking-wide">
             {creditsLeft}/{maxCredits}
           </span>
         </div>
@@ -77,7 +77,7 @@ export default function TopNavbar({
             onClick={() => setActiveTab('home')}
             className={`p-1.5 rounded-lg transition-colors ${
               activeTab === 'home'
-                ? 'text-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a]'
+                ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
                 : 'text-[#8e8278] hover:text-black dark:hover:text-white'
             }`}
             title="Home"
@@ -88,7 +88,7 @@ export default function TopNavbar({
             onClick={() => setActiveTab('image')}
             className={`p-1.5 rounded-lg transition-colors ${
               activeTab === 'image'
-                ? 'text-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a]'
+                ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
                 : 'text-[#8e8278] hover:text-black dark:hover:text-white'
             }`}
             title="Image Generation Studio"
@@ -99,7 +99,7 @@ export default function TopNavbar({
             onClick={() => setActiveTab('video')}
             className={`p-1.5 rounded-lg transition-colors ${
               activeTab === 'video'
-                ? 'text-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a]'
+                ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
                 : 'text-[#8e8278] hover:text-black dark:hover:text-white'
             }`}
             title="Video Generation Studio"
@@ -110,7 +110,7 @@ export default function TopNavbar({
             onClick={() => setActiveTab('edit')}
             className={`p-1.5 rounded-lg transition-colors ${
               activeTab === 'edit'
-                ? 'text-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a]'
+                ? 'text-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a]'
                 : 'text-[#8e8278] hover:text-black dark:hover:text-white'
             }`}
             title="AI Inpainting & Canvas Editor"

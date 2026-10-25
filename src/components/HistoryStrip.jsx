@@ -79,7 +79,7 @@ export default function HistoryStrip({
         >
           <button
             onClick={() => scroll('left')}
-            className="w-7 h-7 rounded-full bg-white dark:bg-[#20242e] shadow-md border border-[#e5ded5] dark:border-[#2c313d] flex items-center justify-center text-[#594d44] dark:text-[#d3ccc4] hover:text-[#de896c] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="w-7 h-7 rounded-full bg-white dark:bg-[#20242e] shadow-md border border-[#e5ded5] dark:border-[#2c313d] flex items-center justify-center text-[#594d44] dark:text-[#d3ccc4] hover:text-[#df795d] hover:scale-105 active:scale-95 transition-all cursor-pointer"
             title="Scroll Left"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -93,9 +93,9 @@ export default function HistoryStrip({
         >
           {/* Active Generation Shimmer Slot in History */}
           {isGenerating && (
-            <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 border-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a] animate-pulse flex flex-col items-center justify-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#de896c] animate-spin mb-0.5" />
-              <span className="text-[8px] font-bold text-[#de896c] uppercase tracking-wider">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 border-[#df795d] bg-[#fbf2ed] dark:bg-[#2b1f1a] animate-pulse flex flex-col items-center justify-center shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#df795d] animate-spin mb-0.5" />
+              <span className="text-[8px] font-bold text-[#df795d] uppercase tracking-wider">
                 Cooking
               </span>
             </div>
@@ -109,8 +109,8 @@ export default function HistoryStrip({
                 onClick={() => onSelectHistory(item)}
                 className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 group/item border transition-all duration-200 cursor-pointer shadow-xs focus:outline-none ${
                   isSelected
-                    ? 'ring-2 ring-[#de896c] border-[#de896c] scale-105'
-                    : 'border-[#ebe1d5] dark:border-[#2b2f38] hover:border-[#de896c] hover:scale-105'
+                    ? 'ring-2 ring-[#df795d] border-[#df795d] scale-105'
+                    : 'border-[#ebe1d5] dark:border-[#2b2f38] hover:border-[#df795d] hover:scale-105'
                 }`}
                 title={`Click to load: "${item.prompt}"`}
               >
