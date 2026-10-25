@@ -73,13 +73,22 @@ export default function OutputCanvas({
       )}
 
       {/* Generation Batches matching the exact mockup layout */}
-      {batches.map((batch) => (
-        <section
-          key={batch.id}
-          className="flex flex-col xl:flex-row gap-3.5 items-stretch group transition-all duration-300"
-        >
-          {/* Left Prompt Card matching Image 1 */}
-          <div className="w-full xl:w-72 xl:min-w-[280px] p-4 rounded-2xl bg-[#fcf8f4] dark:bg-[#16181d] border border-[#f2eae0] dark:border-[#252830] flex flex-col justify-between shadow-2xs hover:border-[#df795d]/60 transition-colors">
+      {batches.map((batch) => {
+        const isSingle = batches.length === 1 && !isGenerating;
+
+        return (
+          <section
+            key={batch.id}
+            className={`flex gap-3.5 items-stretch group transition-all duration-300 ${
+              isSingle ? 'flex-col' : 'flex-col xl:flex-row'
+            }`}
+          >
+            {/* Prompt Card */}
+            <div
+              className={`p-4 rounded-2xl bg-[#fcf8f4] dark:bg-[#16181d] border border-[#f2eae0] dark:border-[#252830] flex flex-col justify-between shadow-2xs hover:border-[#df795d]/60 transition-colors ${
+                isSingle ? 'w-full' : 'w-full xl:w-72 xl:min-w-[280px]'
+              }`}
+            >
             <div className="flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#8a7d72] dark:text-[#9ea6b5]">
@@ -199,7 +208,8 @@ export default function OutputCanvas({
             ))}
           </div>
         </section>
-      ))}
+        );
+      })}
     </main>
   );
 }
