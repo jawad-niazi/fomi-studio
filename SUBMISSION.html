@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOMI — Frontend Engineer Assessment Submission — Jawad Niazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #c85a3c;
+      --text-dark: #181a20;
+      --text-muted: #575e6d;
+      --bg: #ffffff;
+      --border: #e4e7ec;
+      --card-bg: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-dark);
+      background-color: #f1f3f7;
+      line-height: 1.6;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 56px 64px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .print-bar {
+      max-width: 860px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #181a20;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .print-btn {
+      background: #e28065;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .print-btn:hover {
+      background: #cf6d52;
+    }
+
+    header {
+      border-bottom: 2px solid #eef1f6;
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #181a20;
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .company-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #181a20;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #11141a;
+      margin-bottom: 16px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-top: 16px;
+      font-size: 13.5px;
+    }
+
+    .meta-item strong {
+      color: #333945;
+      display: inline-block;
+      min-width: 130px;
+    }
+
+    .meta-item a {
+      color: #c85a3c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .meta-item a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #181a20;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eef1f6;
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #242933;
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: #3d4351;
+      margin-bottom: 14px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 18px;
+      font-size: 14.5px;
+      color: #3d4351;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    li strong {
+      color: #1f242e;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #f0f3f8;
+      border: 1px solid #dce2eb;
+      color: #475164;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+
+    .callout {
+      background: #fdf8f5;
+      border-left: 4px solid #c85a3c;
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #4a3c33;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .page-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      h2 {
+        page-break-before: auto;
+      }
+      a {
+        text-decoration: none;
+        color: #c85a3c !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Top Bar with 1-Click Print Button -->
+  <div class="print-bar">
+    <div>
+      <span style="font-weight: 700; font-size: 15px;">FOMI Assessment Document Ready</span>
+      <span style="color: #9aa1b0; font-size: 13px; margin-left: 12px;">Candidate: Jawad Niazi</span>
+    </div>
+    <button class="print-btn" onclick="window.print()">
+      🖨️ Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="page-container">
+    <header>
+      <div class="logo-row">
+        <div class="logo-icon">F</div>
+        <div class="company-title">FOMI Studio Assessment</div>
+      </div>
+      <h1>Product-Minded Frontend Engineer Assessment</h1>
+      <p style="color: #64748b; font-size: 14px;">National Science & Technology Park (NSTP), Islamabad · FOMI.art</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <strong>Applicant:</strong> Jawad Niazi
+        </div>
+        <div class="meta-item">
+          <strong>Email:</strong> <a href="mailto:jawadniaziniazi@gmail.com">jawadniaziniazi@gmail.com</a>
+        </div>
+        <div class="meta-item">
+          <strong>Live Application:</strong> <a href="https://fomi-studio.vercel.app" target="_blank">fomi-studio.vercel.app</a>
+        </div>
+        <div class="meta-item">
+          <strong>GitHub Repository:</strong> <a href="https://github.com/jawad-niazi/fomi-studio" target="_blank">github.com/jawad-niazi/fomi-studio</a>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Part A: Technical Implementation Summary</h2>
+      <ul>
+        <li><strong>Architecture & Stack:</strong> Built with Next.js 16 (App Router), React 19, JavaScript, and Tailwind CSS v4. Zero external UI component bloat.</li>
+        <li><strong>Visual Precision:</strong> 1:1 pixel recreation of the official FOMI creative suite mockup, including credit quota meter, history filmstrip, dockable generator panel, and prompt-to-4-variant grid.</li>
+        <li><strong>Adaptive Responsive Layout:</strong> On initial load with 1 batch, displays in a spacious stacked canvas (prompt on top, 4 variations below). When multiple generations exist, shifts to a compact side-by-side comparison feed.</li>
+        <li><strong>Dual Theme Polish:</strong> Default studio dark mode (<span class="badge">#0d0f12</span>) alongside a warm porcelain light mode with matching modals and custom minimal scrollbars.</li>
+        <li><strong>Non-Blocking Simulation:</strong> Realistic generation pipeline showing animated skeleton cards in the feed, ensuring creators are never blocked from queueing new prompts.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Part B: Product Thinking Challenge</h2>
+
+      <h3>1. What problem were you trying to solve? What type of user did you design for?</h3>
+      <p><strong>Target User:</strong> Professional visual directors, concept artists, agency creative leads, and content creators who generate dozens of assets daily under tight deadlines.</p>
+      <p><strong>Problem Statement:</strong> Traditional AI image tools operate like turn-based conversational bots (prompt → wait 30 seconds → prompt again). For power creators, this introduces friction and <em>creative amnesia</em>. We designed FOMI Studio as a high-velocity, keyboard-first <strong>iterative visual workbench</strong> where prompt remixing, seed locking, and parameter tweaking happen seamlessly without losing context.</p>
+
+      <h3>2. What are the three most important UX decisions you made? Why?</h3>
+      <ul>
+        <li><strong>1. History Filmstrip as an Interactive "Time Machine":</strong> Clicking any previous thumbnail doesn't just view the image—it instantly restores the exact prompt, model, aspect ratio, and seed into the editor for instant iteration.</li>
+        <li><strong>2. Non-Blocking Background Generation:</strong> The generator field unlocks immediately after submitting, queueing a glowing placeholder card on the canvas so power users can run multiple ideas back-to-back.</li>
+        <li><strong>3. Spatial Cause-and-Effect Relationship:</strong> Placing the prompt recipe card directly adjacent to its resulting 4-variant grid gives creators instant visual feedback on how specific keywords affect lighting, skin textures, and composition.</li>
+      </ul>
+
+      <h3>3. Which features did you intentionally leave out? Why?</h3>
+      <ul>
+        <li><strong>Public Community Feeds / Social Walls:</strong> Professional creators working on client briefs require deep focus and confidentiality. Keeping the workspace clean of social clutter preserves creative momentum.</li>
+        <li><strong>Overly Technical Mathematical Sliders:</strong> Following FOMI's principle of <em>"Maximum capability, Minimum complexity"</em>, deep parameters (CFG Scale, Sampler steps, Negative prompts) are grouped inside an expandable Advanced accordion with smart presets.</li>
+        <li><strong>Full-Screen Interruptive Modals:</strong> Output cards render smoothly in-place so users never lose spatial awareness of their canvas.</li>
+      </ul>
+
+      <h3>4. Which existing products inspired your thinking? What did you like? What would you improve?</h3>
+      <p><strong>Krea.ai & Magnific AI:</strong> We admired their dark aesthetic and crisp card rounding. However, they often hide prompt recipes in secondary menus. We improved this by keeping the prompt card and model badge permanently visible alongside each output batch.</p>
+      <p><strong>Cursor & Linear:</strong> We integrated developer-grade ergonomics—instant keyboard shortcuts (<span class="badge">Ctrl + Enter</span>), instant clipboard toasts, and AI Prompt Magic—into an artist-centric workspace.</p>
+
+      <h3>5. If you had another month to work on this product, what would you improve?</h3>
+      <ul>
+        <li><strong>Infinite Whiteboard Moodboard:</strong> Allow creators to drag, arrange, zoom, and group 50+ images across an infinite canvas for cinematic storyboarding.</li>
+        <li><strong>Localized Inpainting Brush:</strong> Selectively paint over specific areas (e.g. swapping jewelry or hair color) while maintaining facial consistency across iterations.</li>
+      </ul>
+
+      <h3>6. If you could add one feature specifically for professional creators, what would it be?</h3>
+      <div class="callout">
+        <strong>Character Consistency Locker (Persistent AI Identity Engine):</strong><br>
+        Allows directors to lock a character's facial structure, wardrobe, and aesthetic style across different scenes, lighting conditions, and angles. Generates a unique <code>@actor-token</code> that ensures 100% visual consistency throughout an entire brand campaign or comic book.
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
