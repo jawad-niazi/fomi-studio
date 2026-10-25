@@ -183,34 +183,15 @@ export default function TopNavbar({
 
           {/* Account Dropdown Menu */}
           {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#181a20] border border-[#e8ded3] dark:border-[#2b2f3a] shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-white dark:bg-[#181a20] border border-[#e8ded3] dark:border-[#2b2f3a] shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
               {/* User Header */}
-              <div className="px-4 py-3 border-b border-[#f0e6dc] dark:border-[#262933]">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#2d2520] dark:text-[#f2ebe5]">
-                    Hamza Tariq
-                  </span>
-                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#faeee8] dark:bg-[#2b1f1a] text-[#de896c] border border-[#f0d5c8] dark:border-[#42291f]">
-                    PRO
-                  </span>
-                </div>
+              <div className="px-4 py-2.5 border-b border-[#f0e6dc] dark:border-[#262933]">
+                <p className="text-xs font-bold text-[#2d2520] dark:text-[#f2ebe5]">
+                  Hamza Tariq
+                </p>
                 <p className="text-[11px] text-[#8e8074] dark:text-[#9ea6b5] truncate mt-0.5">
                   creator@fomi.art
                 </p>
-
-                {/* Quota in Dropdown */}
-                <div className="mt-2.5 pt-2 border-t border-[#f2e9e0] dark:border-[#242730]">
-                  <div className="flex justify-between text-[10px] text-[#786c62] dark:text-[#9ea6b5] mb-1">
-                    <span>Fast Generations</span>
-                    <span className="font-semibold text-[#de896c]">{creditsLeft}/{maxCredits}</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-[#f0e3d8] dark:bg-[#25282e] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#de896c] rounded-full"
-                      style={{ width: `${(creditsLeft / maxCredits) * 100}%` }}
-                    />
-                  </div>
-                </div>
               </div>
 
               {/* Menu Links */}
@@ -220,21 +201,7 @@ export default function TopNavbar({
                   className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
                 >
                   <Settings className="w-3.5 h-3.5 text-[#8e8074]" />
-                  <span>Workspace Settings</span>
-                </button>
-                <button
-                  onClick={() => setIsProfileOpen(false)}
-                  className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
-                >
-                  <Key className="w-3.5 h-3.5 text-[#8e8074]" />
-                  <span>API Keys & Webhooks</span>
-                </button>
-                <button
-                  onClick={() => setIsProfileOpen(false)}
-                  className="w-full px-4 py-2 flex items-center gap-2.5 hover:bg-[#faf4ed] dark:hover:bg-[#22252e] transition-colors text-left"
-                >
-                  <CreditCard className="w-3.5 h-3.5 text-[#8e8074]" />
-                  <span>Billing & Subscription</span>
+                  <span>Settings</span>
                 </button>
               </div>
 
