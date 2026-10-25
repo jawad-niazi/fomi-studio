@@ -34,6 +34,7 @@ export default function FomiStudioPage() {
   const [copiedPromptId, setCopiedPromptId] = useState(null);
   const [creditsLeft, setCreditsLeft] = useState(78);
   const [toastMessage, setToastMessage] = useState('');
+  const [selectedHistoryId, setSelectedHistoryId] = useState(null);
 
   // Sync dark class on document element
   useEffect(() => {
@@ -126,6 +127,7 @@ export default function FomiStudioPage() {
 
   // 1-Click History Recall
   const handleSelectHistory = (item) => {
+    setSelectedHistoryId(item.id);
     setPrompt(item.prompt);
     if (item.model) setSelectedModel(item.model);
     if (item.aspectRatio) setAspectRatio(item.aspectRatio);
@@ -158,13 +160,14 @@ export default function FomiStudioPage() {
         setActiveTab={setActiveTab}
         creditsLeft={creditsLeft}
         maxCredits={100}
-        openDocModal={() => setIsDocOpen(true)}
       />
 
       {/* 2. Top History Filmstrip Carousel */}
       <HistoryStrip
         historyItems={historyItems}
         onSelectHistory={handleSelectHistory}
+        isGenerating={isGenerating}
+        selectedHistoryId={selectedHistoryId}
       />
 
       {/* 3. Main Studio Workspace Layout */}

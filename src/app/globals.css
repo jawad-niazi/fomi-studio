@@ -12,6 +12,29 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  /* Sleek modern thin scrollbar for textarea and cards */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #dfcfbe;
+    border-radius: 9999px;
+  }
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #313642;
+  }
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #dfcfbe transparent;
+  }
+  .dark .custom-scrollbar {
+    scrollbar-color: #313642 transparent;
+  }
 }
 
 @keyframes shimmer {

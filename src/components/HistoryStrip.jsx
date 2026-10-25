@@ -1,9 +1,14 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
-export default function HistoryStrip({ historyItems, onSelectHistory }) {
+export default function HistoryStrip({
+  historyItems,
+  onSelectHistory,
+  isGenerating,
+  selectedHistoryId,
+}) {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -16,23 +21,28 @@ export default function HistoryStrip({ historyItems, onSelectHistory }) {
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
   };
 
+  // Auto-scroll to beginning when generating starts or new item is added
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [isGenerating, historyItems.length]);
+
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
     // Attach non-passive wheel listener for high-speed horizontal mouse wheel scroll
     const handleWheel = (e) => {
-      // If user scrolls vertically with mouse wheel, translate into fast horizontal scroll
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
-        el.scrollLeft += e.deltaY * 2.2; // High-speed smooth wheel multiplier
+        el.scrollLeft += e.deltaY * 2.2;
       }
     };
 
     el.addEventListener('wheel', handleWheel, { passive: false });
     el.addEventListener('scroll', checkScroll, { passive: true });
 
-    // Initial check
     checkScroll();
 
     return () => {
@@ -81,26 +91,43 @@ export default function HistoryStrip({ historyItems, onSelectHistory }) {
           ref={scrollRef}
           className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5 flex-1 relative"
         >
-          {historyItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onSelectHistory(item)}
-              className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 group/item border border-[#ebe1d5] dark:border-[#2b2f38] hover:border-[#de896c] hover:scale-105 transition-all duration-200 cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-[#de896c]"
-              title={`Click to load: "${item.prompt}"`}
-            >
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover/item:brightness-105 transition-transform duration-300"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="text-[9px] text-white font-medium px-1 text-center line-clamp-2">
-                  Use Prompt
-                </span>
-              </div>
-            </button>
-          ))}
+          {/* Active Generation Shimmer Slot in History */}
+          {isGenerating && (
+            <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 border-[#de896c] bg-[#faeee8] dark:bg-[#2b1f1a] animate-pulse flex flex-col items-center justify-center shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#de896c] animate-spin mb-0.5" />
+              <span className="text-[8px] font-bold text-[#de896c] uppercase tracking-wider">
+                Cooking
+              </span>
+            </div>
+          )}
+
+          {historyItems.map((item) => {
+            const isSelected = selectedHistoryId === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onSelectHistory(item)}
+                className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 group/item border transition-all duration-200 cursor-pointer shadow-xs focus:outline-none ${
+                  isSelected
+                    ? 'ring-2 ring-[#de896c] border-[#de896c] scale-105'
+                    : 'border-[#ebe1d5] dark:border-[#2b2f38] hover:border-[#de896c] hover:scale-105'
+                }`}
+                title={`Click to load: "${item.prompt}"`}
+              >
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover/item:brightness-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-[9px] text-white font-medium px-1 text-center line-clamp-2">
+                    Use Prompt
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Dynamic Right Arrow with Soft Fade: Hidden at end of scroll */}

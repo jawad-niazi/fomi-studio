@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Copy,
   Check,
@@ -23,6 +23,14 @@ export default function OutputCanvas({
   onCopyPrompt,
   copiedPromptId,
 }) {
+  const [expandedPrompts, setExpandedPrompts] = useState({});
+
+  const toggleExpand = (id) => {
+    setExpandedPrompts((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
   return (
     <main className="flex-1 min-w-0 flex flex-col gap-6">
       {/* Active Generating Shimmer Skeleton Card (Non-blocking queue feedback) */}
@@ -99,9 +107,24 @@ export default function OutputCanvas({
                 </div>
               </div>
 
-              <p className="text-xs leading-relaxed text-[#3b322c] dark:text-[#ede4dc] font-normal select-text">
-                {batch.prompt}
-              </p>
+              <div>
+                <p
+                  className={`text-xs leading-relaxed text-[#3b322c] dark:text-[#ede4dc] font-normal select-text transition-all ${
+                    !expandedPrompts[batch.id] ? 'line-clamp-5' : ''
+                  }`}
+                >
+                  {batch.prompt}
+                </p>
+                {batch.prompt.length > 180 && (
+                  <button
+                    type="button"
+                    onClick={() => toggleExpand(batch.id)}
+                    className="mt-1.5 text-[10px] font-semibold text-[#de896c] hover:underline cursor-pointer"
+                  >
+                    {expandedPrompts[batch.id] ? 'Show less' : 'Show more...'}
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Model Badge at bottom right matching the mockup */}

@@ -92,7 +92,7 @@ export default function ControlPanel({
             onKeyDown={handleKeyDown}
             rows={5}
             placeholder="Describe your imaginations to be converted to piece of art..."
-            className="w-full bg-transparent resize-none text-xs md:text-sm text-[#2b2521] dark:text-[#ede6df] placeholder-[#a6998f] dark:placeholder-[#787f8d] outline-none leading-relaxed"
+            className="w-full bg-transparent resize-none text-xs md:text-sm text-[#2b2521] dark:text-[#ede6df] placeholder-[#a6998f] dark:placeholder-[#787f8d] outline-none leading-relaxed custom-scrollbar pr-1"
           />
 
           {/* Prompt Toolbar inside the box: AI Wand & Clear */}
