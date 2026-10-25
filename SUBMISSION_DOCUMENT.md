@@ -1,9 +1,10 @@
 # FOMI — Frontend Engineer Assessment Submission
-**Applicant:** Product-Minded Frontend Engineer Candidate  
+**Applicant:** Jawad Niazi  
+**Email:** jawadniaziniazi@gmail.com  
 **Company:** FOMI (National Science & Technology Park - NSTP, Islamabad)  
 **Role:** Product-Minded Frontend Engineer  
-**Live Vercel Application:** [https://fomi-studio.vercel.app](https://fomi-studio.vercel.app) *(Replace with your deployed URL)*  
-**GitHub Repository:** [https://github.com/your-username/fomi-studio](https://github.com/your-username/fomi-studio) *(Replace with your GitHub repo)*  
+**Live Vercel Application:** [https://fomi-studio.vercel.app](https://fomi-studio.vercel.app)  
+**GitHub Repository:** [https://github.com/jawad-niazi/fomi-studio](https://github.com/jawad-niazi/fomi-studio)  
 
 ---
 
